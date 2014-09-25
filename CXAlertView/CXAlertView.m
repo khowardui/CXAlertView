@@ -13,7 +13,6 @@
 #import "CXAlertButtonContainerView.h"
 #import <QuartzCore/QuartzCore.h>
 #import "LFGlassView.h"
-#import "UIScreen+SN.h"
 
 static CGFloat const kDefaultScrollViewPadding = 10.;
 static CGFloat const kDefaultButtonHeight = 44.;
@@ -260,7 +259,16 @@ static CXAlertView *__cx_alert_current_view;
     viewController.alertView = self;
     
     if (!self.alertWindow) {
-        UIWindow *window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreenCurrentOrientationBounds]];
+        CGRect orientedScreen = [UIScreen mainScreen].bounds;
+        UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+        
+        if (UIInterfaceOrientationIsLandscape(orientation) && !SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")  ) {
+            CGFloat temp = orientedScreen.size.width;
+            orientedScreen.size.width = orientedScreen.size.height;
+            orientedScreen.size.height = temp;
+        }
+        
+        UIWindow *window = [[UIWindow alloc] initWithFrame:orientedScreen];
         window.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         window.opaque = NO;
         window.windowLevel = UIWindowLevelAlert;
@@ -339,7 +347,15 @@ static CXAlertView *__cx_alert_current_view;
 + (void)showBackground
 {
     if (!__cx_alert_background_window) {
-        __cx_alert_background_window = [[CXAlertBackgroundWindow alloc] initWithFrame:[UIScreen mainScreenNativeBounds]];
+        CGRect frame;
+        
+        if ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]) {
+            frame = [UIScreen mainScreen].nativeBounds;
+        } else {
+            frame = [UIScreen mainScreen].bounds;
+        }
+        
+        __cx_alert_background_window = [[CXAlertBackgroundWindow alloc] initWithFrame:frame];
         
         [__cx_alert_background_window makeKeyAndVisible];
         __cx_alert_background_window.alpha = 0;
