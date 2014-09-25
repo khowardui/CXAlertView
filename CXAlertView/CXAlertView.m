@@ -12,8 +12,8 @@
 #import "CXAlertViewController.h"
 #import "CXAlertButtonContainerView.h"
 #import <QuartzCore/QuartzCore.h>
-
 #import "LFGlassView.h"
+#import "UIScreen+SN.h"
 
 static CGFloat const kDefaultScrollViewPadding = 10.;
 static CGFloat const kDefaultButtonHeight = 44.;
@@ -260,7 +260,7 @@ static CXAlertView *__cx_alert_current_view;
     viewController.alertView = self;
     
     if (!self.alertWindow) {
-        UIWindow *window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        UIWindow *window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreenCurrentOrientationBounds]];
         window.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         window.opaque = NO;
         window.windowLevel = UIWindowLevelAlert;
@@ -339,7 +339,7 @@ static CXAlertView *__cx_alert_current_view;
 + (void)showBackground
 {
     if (!__cx_alert_background_window) {
-        __cx_alert_background_window = [[CXAlertBackgroundWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        __cx_alert_background_window = [[CXAlertBackgroundWindow alloc] initWithFrame:[UIScreen mainScreenNativeBounds]];
         
         [__cx_alert_background_window makeKeyAndVisible];
         __cx_alert_background_window.alpha = 0;
