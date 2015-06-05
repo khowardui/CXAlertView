@@ -259,16 +259,7 @@ static CXAlertView *__cx_alert_current_view;
     viewController.alertView = self;
     
     if (!self.alertWindow) {
-        CGRect orientedScreen = [UIScreen mainScreen].bounds;
-        UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-        
-        if (UIInterfaceOrientationIsLandscape(orientation) && !SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")  ) {
-            CGFloat temp = orientedScreen.size.width;
-            orientedScreen.size.width = orientedScreen.size.height;
-            orientedScreen.size.height = temp;
-        }
-        
-        UIWindow *window = [[UIWindow alloc] initWithFrame:orientedScreen];
+        UIWindow *window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
         window.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         window.opaque = NO;
         window.windowLevel = UIWindowLevelAlert;
@@ -347,15 +338,10 @@ static CXAlertView *__cx_alert_current_view;
 + (void)showBackground
 {
     if (!__cx_alert_background_window) {
-        CGRect frame;
+        __cx_alert_background_window = [[CXAlertBackgroundWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
         
-        if ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)]) {
-            frame = [UIScreen mainScreen].nativeBounds;
-        } else {
-            frame = [UIScreen mainScreen].bounds;
-        }
-        
-        __cx_alert_background_window = [[CXAlertBackgroundWindow alloc] initWithFrame:frame];
+        UIViewController *rootVC = [UIViewController new];
+        __cx_alert_background_window.rootViewController = rootVC;
         
         [__cx_alert_background_window makeKeyAndVisible];
         __cx_alert_background_window.alpha = 0;
