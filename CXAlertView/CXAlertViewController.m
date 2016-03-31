@@ -60,7 +60,7 @@
     [UIApplication sharedApplication].statusBarHidden = _rootViewControllerPrefersStatusBarHidden;
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
     [self.alertView resetTransition];
     [self.alertView invalidateLayout];
