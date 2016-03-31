@@ -42,6 +42,22 @@
 {
     [super viewDidLoad];
     [self.alertView setup];
+    
+    [UIApplication sharedApplication].statusBarHidden = _rootViewControllerPrefersStatusBarHidden;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [UIApplication sharedApplication].statusBarHidden = _rootViewControllerPrefersStatusBarHidden;
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    [UIApplication sharedApplication].statusBarHidden = _rootViewControllerPrefersStatusBarHidden;
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -50,7 +66,7 @@
     [self.alertView invalidateLayout];
 }
 
-- (NSUInteger)supportedInterfaceOrientations
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     return UIInterfaceOrientationMaskAll;
 }
@@ -64,5 +80,8 @@
 {
     return YES;
 }
-
+- (BOOL)prefersStatusBarHidden
+{
+    return _rootViewControllerPrefersStatusBarHidden;
+}
 @end

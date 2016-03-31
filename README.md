@@ -1,20 +1,39 @@
 CXAlertView
 ===========
 
+Version 1.1.0
+
+* Replace `LiveFrost` by native blur function
+* Simulate appearance in iOS7.1
+* Bug fix
+
 Version 1.0.1
-This is a custom alertview which allow you to add view as you like in iOS7.
 
 >You cannot customize the appearance of alert views.' - [iOS 7 Design Resources ](https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/UIKitUICatalog/UIAlertView.html#//apple_ref/doc/uid/TP40012857-UIAlertView-SW1)
 
-If you ever try to mess up with the UIAlertView, it is easy. Go to add at least five buttons on it. Therefore I change the layout with buttons. In this custom alertview, you can add buttons as more as you like. Also you are able to change the appearance of it.
+If you ever try to mess up with the UIAlertView, it is easy. Go to add at least five buttons on it. Therefore We change the layout with buttons.
+
+This is a custom alert view developed by Chris Xu and enhanced by other contributors which allows you to following things
+ * Show ios7 styled alerts in ios 5 and 6.
+
+	![ScreenShot 2](screenshot2.png)
+ * Unlike iOS 6 and below , on IOS 7 is non-customisable i.e., you can't modify to customise it. This alert allows you to Add view as you like in iOS7.
+
+	![ScreenShot 1](screenshot1.png)
+
+ * Multilined alert texts and button titles.
+ 
+	![Multilined Button Titles](screenshot-multilined-buttons.png)
+ * Fully customizable alertview with interchangable colors,radiuses,fonts..etc.
 
 ---
-![ScreenShot 1](screenshot1.png)-![ScreenShot 2](screenshot2.png)
+
 
 ##Installation
 
 * CocoaPods add `pod 'CXAlertView'`
 
+* If using as a git submodule, you will also need to add [LiveFrost](https://github.com/radi/LiveFrost.git)
 
 ##How to use
 ---
@@ -41,13 +60,13 @@ If you ever try to mess up with the UIAlertView, it is easy. Go to add at least 
 ##Next
 ---
 
+ * Replace blur function by `UIVisualEffect` in iOS8
  * Bug fix.
  
  
 ##Thanks
 ---
  * [SIAlertView](https://github.com/Sumi-Interactive/SIAlertView) for some tips to build this.
- * [LiveFrost](https://github.com/radi/LiveFrost) for blur background support.
 
 ##Support
 ---
@@ -72,3 +91,7 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED ‘AS IS’, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/ChrisXu1221/cxalertview/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
